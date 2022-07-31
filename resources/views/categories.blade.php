@@ -3,20 +3,17 @@
 @section('container')
 
 <section>
-    <h1 class="text-center">Data Articles</h1>
+    <h1 class="text-center">DATA categories</h1>
     <div class="container mb-2">
-        <a href="/add_articles" type="button" class="btn btn-success">Tambah
+        <a href="/add_categories" type="button" class="btn btn-success">Tambah
             +</a>
         <div class="row">
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">articles id</th>
+                        <th scope="col">categories id</th>
                         <th scope="col">User id</th>
-                        <th scope="col">Categories id</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Content</th>
-                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -25,7 +22,7 @@
 
                     <script>
                         const token = JSON.parse(localStorage.getItem("token"));
-                        fetch('http://127.0.0.1:8000/api/all_articles',{
+                        fetch('http://127.0.0.1:8000/api/all_categories',{
                             method: 'GET',
                             headers : new Headers({
                                 'Authorization': 'Bearer ' +token,
@@ -36,19 +33,15 @@
                         .then((data) => {
                             let output = '';
                             data = data.data;
-                            data.forEach(function(articles){
+                            data.forEach(function(categories){
+                                console.log(categories);
                                 output += `
                                     <tr>
-                                        <th scope="row">${articles.id}</th>
-                                        <td>${articles.user_id}</td>
-                                        <td>${articles.categories_id}</td>
-                                        <td>${articles.title}</td>
-                                        <td>${articles.content}</td>
-                                        <td><img src="${articles.image}" style="width: 8em;"></td>
-                                        <td><a href="/edit_articles/${articles.id}"><button class="btn btn-success mb-1">Edit</button></a>
-                                        <button onclick="deleteArticles(${articles.id})" class="btn btn-danger mb-1">Delete</button>  
-                                        </td>
-                                        
+                                        <th scope="row">${categories.id}</th>
+                                        <td>${categories.user_id}</td>
+                                        <td>${categories.name}</td>
+                                        <td><a href="/edit_Categories/${categories.id}"><button class="btn btn-success mb-1">Edit</button></a>
+                                            <button onclick="deleteCategories(${categories.id})" class="btn btn-danger mb-1">Delete</button>  </td>
                                     </tr>
                                 `;
                             })
@@ -56,10 +49,9 @@
                         })
                         .catch((err) => console.log(err));
 
-
                         //delete
-                        function deleteArticles(id) {
-                            fetch('http://127.0.0.1:8000/api/delete_articles/' +id,{
+                        function deleteCategories(id) {
+                            fetch('http://127.0.0.1:8000/api/delete_categories/' +id,{
                             method: 'DELETE',
                             headers : new Headers({
                                     'Authorization': 'Bearer ' +token,
@@ -73,6 +65,7 @@
                             })
                             .catch((err) => console.log(err));
                         }
+
                     </script>
 
                 </tbody>

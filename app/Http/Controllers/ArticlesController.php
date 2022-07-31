@@ -23,11 +23,11 @@ class ArticlesController extends Controller
     }
     
     //create
-    public function insertArticles(Request $request,$id_categories){
+    public function insertArticles(Request $request){
 
         $data = Articles::create([
             'user_id' => Auth::user()->id,
-            'categories_id' => $id_categories,
+            'categories_id' => $request -> categories_id,
             'title' => $request -> title,
             'content' => $request -> content,
             'image' => $request -> image,
@@ -42,6 +42,7 @@ class ArticlesController extends Controller
    
         $response = Articles::findOrFail($id);
         $response->update([
+            'categories_id' => $request -> categories_id,
             'title' => $request -> title,
             'content' => $request -> content,
             'image' => $request -> image,

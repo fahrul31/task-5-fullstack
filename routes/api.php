@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/delete_categories/{id_categories}', [CategoriesController::class,'deleteCategories']);
 
     Route::get('/all_articles', [ArticlesController::class,'getAllArticles']);
-    Route::post('/insert_articles/{id_categories}', [ArticlesController::class,'insertArticles']);
+    Route::post('/insert_articles', [ArticlesController::class,'insertArticles']);
     Route::get('/detail_articles/{id_articles}', [ArticlesController::class,'detailArticles']);
     Route::put('/update_articles/{id_articles}', [ArticlesController::class,'updateArticles']);
     Route::delete('/delete_articles/{id_articles}', [ArticlesController::class,'deleteArticles']);

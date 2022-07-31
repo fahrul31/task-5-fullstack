@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/css/theme.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="assets/css/util.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/main.css"> 
+	  <link rel="stylesheet" type="text/css" href="assets/css/main.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -58,7 +58,7 @@
             $.ajax({
                 ...settings,
                 success: function (response) {//once the request successfully process to the server side it will return result here
-                  localStorage.setItem("token", response.data.token);
+                  localStorage.setItem("token", JSON.stringify(response.data.token));
                   console.log(localStorage.getItem("token"));
                   location.href = "http://127.0.0.1:8000/articles";
                 },
