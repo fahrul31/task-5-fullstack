@@ -25,6 +25,7 @@
 
                     <script>
                         const token = JSON.parse(localStorage.getItem("token"));
+                        console.log(token);
                         fetch('http://127.0.0.1:8000/api/all_articles',{
                             method: 'GET',
                             headers : new Headers({

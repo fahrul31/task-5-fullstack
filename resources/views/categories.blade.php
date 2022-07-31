@@ -3,7 +3,7 @@
 @section('container')
 
 <section>
-    <h1 class="text-center">DATA categories</h1>
+    <h1 class="text-center">Data Categories</h1>
     <div class="container mb-2">
         <a href="/add_categories" type="button" class="btn btn-success">Tambah
             +</a>

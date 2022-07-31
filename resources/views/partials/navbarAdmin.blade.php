@@ -19,9 +19,8 @@
                 </li>
 
                 <li class="nav-item px-3 px-xl-4">
-                    <form action="/logout" method="post">
-                        @csrf
-                        <button type="submit" class="nav-link fw-medium"
+
+                        <button onclick=logout() type="submit" class="nav-link fw-medium"
                             style="background-color:white; border-color: transparent;"
                             aria-current="page">Logout <svg
                                 xmlns="http://www.w3.org/2000/svg" width="16"
@@ -29,12 +28,34 @@
                                 class="bi bi-arrow-right-circle"
                                 viewBox="0 0 16 16">
                             </svg>
-                </li></button>
-                </form>
+                        </button>
+                </li>
+                <script>
+                    function logout(id) {
+                        const token = JSON.parse(localStorage.getItem("token"));
+                        fetch("http://127.0.0.1:8000/api/logout",{
+                        method: 'GET',
+                        headers : new Headers({
+                                'Authorization': 'Bearer ' +token,
+                                'Content-Type': 'application/json; charset=UTF-8',
+                            })
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            localStorage.clear();
+                            location.href = "http://127.0.0.1:8000";
+                        })
+                        .catch((err) => alert("error"));
+                    }
+                    
+                
+                </script>
 
             </ul>
         </div>
     </div>
 </nav>
+
+
 <section style="padding-top: 5rem;">
 
