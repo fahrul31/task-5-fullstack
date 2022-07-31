@@ -57,8 +57,10 @@
             };
             $.ajax({
                 ...settings,
-                success: function (result) {
-                    location.href = "http://127.0.0.1:8000/articles";
+                success: function (response) {//once the request successfully process to the server side it will return result here
+                  localStorage.setItem("token", response.data.token);
+                  console.log(localStorage.getItem("token"));
+                  location.href = "http://127.0.0.1:8000/articles";
                 },
                 error : function (){
                     alert("error")

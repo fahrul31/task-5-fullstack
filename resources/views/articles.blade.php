@@ -2,43 +2,87 @@
 
 @section('container')
 
-    <section class="pt-5" id="destination">
-        <div class="container">
-            <div
-                class="position-absolute start-100 bottom-0 translate-middle-x d-none d-xl-block ms-xl-n4">
-            </div>
-            <div class="mb-7 text-center">
-                <h5 class="text-secondary">List</h5>
-                <h3
-                    class="fs-xl-10 fs-lg-8 fs-7 fw-bold font-cursive text-capitalize">
-                    List Articles</h3>
-            </div>
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <div class="card overflow-hidden shadow"> <img
-                            class="card-img-top"
-                            src="assets/img/dest/komodo.jpg"
-                            alt="Rome, Italty" />
-                        <div class="card-body py-4 px-3">
-                            <div
-                                class="d-flex flex-column flex-lg-row justify-content-between mb-3">
-                                <h4 class="text-secondary fw-medium"><a
-                                        class="link-900 text-decoration-none stretched-link"
-                                        href="/detailwisata">Kuta Beach</a></h4>
-                                <span class="fs-1 fw-medium">IDR
-                                    10.000</span>
-                            </div>
-                            <div class="d-flex align-items-center"> <img
-                                    src="assets/img/dest/star.png"
-                                    style="margin-right: 14px" width="20"
-                                    alt="navigation" /><span
-                                    class="fs-0 fw-medium">4.5/5</span>
-                            </div>
-                        </div>
-                    </div>
+<section>
+    <h1 class="text-center">DATA Articles</h1>
+    <div class="container mb-2">
+        <a href="/" type="button" class="btn btn-success">Tambah
+            +</a>
+            <div class="row g-3 align-items-center mt-1">
+                <div class="col-auto">
+                <form action="/admin-customer" method="GET">
+                  <input type="search" name='search' class="form-control" aria-describedby="passwordHelpInline">
+                </form>
                 </div>
-            </div>
-</section>
+              </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">articles id</th>
+                        <th scope="col">User id</th>
+                        <th scope="col">Categories id</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Content</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="output">
+                
 
+                    <script>
+                        const token = JSON.parse(localStorage.getItem("token"));
+
+                        // kita gunakan fetch dalam kita ambil data sample.txt yang sudah kita buat
+                        fetch('http://127.0.0.1:8000/api/all_articles',{
+                            method: 'GET',
+                            headers : new Headers({
+                                'Authorization': 'Bearer ' +token,
+                                'Content-Type': 'application/json; charset=UTF-8',
+                            })
+                        })
+                        // kita buat response menjadi json
+                        .then((response) => response.json())
+                        // lalu data nya kita ambil dan kita masuken ke p id output
+                        .then((data) => {
+                            // kita buat variabel output 
+                            let output = '';
+                            // kita console.log agar mengetahui apakah data nya sudah masuk atau belum
+                            console.log(data.data);
+                            data = data.data;
+
+                            // forEach ini adalah looping dan dinamakan user
+                            data.forEach(function(articles){
+                                // kita tambahkan output-nya jangan lupa gunakan backslash `` yang di sebelah angka nomer 1
+                                // kita panggil id name email didapat dari users.json
+                                console.log(articles);
+                                output += `
+                                    <tr>
+                                        <th scope="row">${articles.id}</th>
+                                        <td>${articles.user_id}</td>
+                                        <td>${articles.categories_id}</td>
+                                        <td>${articles.title}</td>
+                                        <td>${articles.content}</td>
+                                        <td>${articles.image}</td>
+                                        <td></td>
+                                        
+                                    </tr>
+                                `;
+                            })
+                            
+                            // kita panggil id output agar bisa di tampilkan ke browser saat di klik
+                            document.getElementById('output').innerHTML = output;
+                        })
+                        // membuat catch jadi kalau ada yang error langsung ketawan
+                        .catch((err) => console.log(err));
+
+                    </script>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>
 
 @endsection
