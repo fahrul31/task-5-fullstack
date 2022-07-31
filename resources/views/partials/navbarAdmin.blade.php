@@ -11,14 +11,11 @@
             <ul
                 class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
                 <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium"
-                        aria-current="page" href="/admin-wisata">Data Wisata</a>
+                        aria-current="page" href="/admin-wisata">Data Articles</a>
                 </li>
                 <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium"
-                        aria-current="page" href="/admin-customer">Data
-                        Customer</a>
-                </li>
-                <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium"
-                        aria-current="page" href="/admin-datatransaksi">Data Transaksi</a>
+                        aria-current="page" href="/admin-customer">Data Categories
+                        </a>
                 </li>
 
                 <li class="nav-item px-3 px-xl-4">
