@@ -15,8 +15,6 @@
                                 class="form-label">Categories ID</label>
                             <select class="form-select" id="categories_id" name="categories_id" aria-label="Floating label select example">
                                 <option selected></option>
-                                <option value="1">Electronics</option>
-                                <option value="2">Clothes</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -46,8 +44,28 @@
         </div>
     </div>
     <script>
+        const token = JSON.parse(localStorage.getItem("token"));
+        fetch('http://127.0.0.1:8000/api/all_categories',{
+            method: 'GET',
+            headers : new Headers({
+                'Authorization': 'Bearer ' +token,
+                'Content-Type': 'application/json; charset=UTF-8',
+            })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            let output = '';
+            data = data.data;
+            data.forEach(function(categories){
+                output += `
+                    <option value="${categories.id}">${categories.name}</option>
+                `;
+            })
+            document.getElementById('categories_id').innerHTML = output;
+        })
+        .catch((err) => console.log(err));
+
         function addArticles() {
-            const token = JSON.parse(localStorage.getItem("token"));
             fetch('http://127.0.0.1:8000/api/insert_articles',{
             method: 'POST',
             headers : new Headers({
